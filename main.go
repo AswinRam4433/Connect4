@@ -19,12 +19,36 @@ func main() {
 	// addCoin(&board, 4, 2)
 	// addCoin(&board, 3, 1)
 
+	// addCoin(&board, 3, 1)
+	// addCoin(&board, 3, 2)
+	// addCoin(&board, 2, 1)
+	// addCoin(&board, 2, 2)
+	// addCoin(&board, 1, 1)
+	// addCoin(&board, 1, 2)
+	// addCoin(&board, 4, 1)
+
+	// addCoin(&board, 0, 1)
+	// addCoin(&board, 1, 2)
+	// addCoin(&board, 1, 1)
+	// addCoin(&board, 2, 2)
+	// addCoin(&board, 2, 1)
+	// addCoin(&board, 3, 2)
+	// addCoin(&board, 2, 1)
+	// addCoin(&board, 3, 2)
+	// addCoin(&board, 4, 1)
+	// addCoin(&board, 3, 2)
+	// addCoin(&board, 3, 1)
+
+	addCoin(&board, 7, 1)
+	addCoin(&board, 6, 2)
+	addCoin(&board, 6, 1)
+	addCoin(&board, 5, 2)
+	addCoin(&board, 5, 1)
+	addCoin(&board, 4, 2)
+	addCoin(&board, 5, 1)
+	addCoin(&board, 4, 2)
 	addCoin(&board, 3, 1)
-	addCoin(&board, 3, 2)
-	addCoin(&board, 2, 1)
-	addCoin(&board, 2, 2)
-	addCoin(&board, 1, 1)
-	addCoin(&board, 1, 2)
+	addCoin(&board, 4, 2)
 	addCoin(&board, 4, 1)
 
 }
@@ -119,6 +143,41 @@ func checkSolved(board *[8][8]int) int {
 		for j := 0; j < 5; j++ {
 			if b_trans[i][j] == b_trans[i][j+1] && b_trans[i][j+1] == b_trans[i][j+2] && b_trans[i][j+2] == b_trans[i][j+3] && b_trans[i][j+2] != 0 {
 				return b_trans[i][j]
+			}
+		}
+	}
+
+	// for i := 0; i < 5; i++ {
+	// 	for j := 0; j < 5; j++ {
+	// 		if board[i][j] == board[i+1][j+1] && board[i+1][j+1] == board[i+2][j+2] && board[i+2][j+2] == board[i+3][j+3] && board[i+2][j+2] != 0 {
+	// 			return board[i+2][j+2]
+	// 		}
+	// 	}
+	// }
+
+	// b_trans = transpose(board)
+	// for i := 0; i < 5; i++ {
+	// 	for j := 0; j < 5; j++ {
+	// 		if b_trans[i][j] == b_trans[i+1][j+1] && b_trans[i+1][j+1] == b_trans[i+2][j+2] && b_trans[i+2][j+2] == b_trans[i+3][j+3] && b_trans[i+2][j+2] != 0 {
+	// 			return b_trans[i+2][j+2]
+	// 		}
+	// 	}
+	// }
+
+	for i := 0; i < 5; i++ {
+		for j := 0; j < 5; j++ {
+			if board[i][j] == board[i+1][j+1] && board[i+1][j+1] == board[i+2][j+2] && board[i+2][j+2] == board[i+3][j+3] && board[i+2][j+2] != 0 {
+				return board[i+2][j+2]
+			}
+		}
+	}
+
+	// checking diagonally (from top-right to bottom-left)
+	b_trans = transpose(board)
+	for i := 0; i < 5; i++ {
+		for j := 3; j < 8; j++ {
+			if b_trans[i][j] == b_trans[i+1][j-1] && b_trans[i+1][j-1] == b_trans[i+2][j-2] && b_trans[i+2][j-2] == b_trans[i+3][j-3] && b_trans[i+2][j-2] != 0 {
+				return b_trans[i+2][j-2]
 			}
 		}
 	}
