@@ -8,15 +8,24 @@ import (
 func main() {
 	fmt.Println("Implementing Connect 4 in GoLang")
 	var board [8][8]int
-	initBoard(&board)
-	addCoin(&board, 3, 1)
-	addCoin(&board, 4, 2)
-	addCoin(&board, 3, 1)
-	addCoin(&board, 4, 2)
-	addCoin(&board, 3, 1)
-	addCoin(&board, 4, 2)
-	addCoin(&board, 3, 1)
 	// pass the arguments as references because the functions now take params by reference
+	initBoard(&board)
+
+	// addCoin(&board, 3, 1)
+	// addCoin(&board, 4, 2)
+	// addCoin(&board, 3, 1)
+	// addCoin(&board, 4, 2)
+	// addCoin(&board, 3, 1)
+	// addCoin(&board, 4, 2)
+	// addCoin(&board, 3, 1)
+
+	addCoin(&board, 3, 1)
+	addCoin(&board, 3, 2)
+	addCoin(&board, 2, 1)
+	addCoin(&board, 2, 2)
+	addCoin(&board, 1, 1)
+	addCoin(&board, 1, 2)
+	addCoin(&board, 4, 1)
 
 }
 
