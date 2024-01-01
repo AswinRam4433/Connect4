@@ -200,7 +200,7 @@ func removeCoin(board *[8][8]int, col int) {
 	}
 }
 
-func curScore(board *[8][8]int, turn int) int {
+func curScoreOld(board *[8][8]int, turn int) int {
 	score := 0
 	// horizontal one coin away from win layouts
 
@@ -245,6 +245,84 @@ func displayBoard(board *[8][8]int) {
 
 	}
 }
+
+func curScore(board *[8][8]int, turn int) int {
+	score := 0
+
+	// Check for potential winning moves for both players
+	for i := 0; i < 8; i++ {
+		for j := 0; j < 5; j++ {
+			// Check horizontal threats
+			if board[i][j+1] == board[i][j+2] && board[i][j+1] != 0 {
+				if board[i][j] == board[i][j+1] || board[i][j+2] == board[i][j+3] {
+					if board[i][j+1] == turn {
+						score += 10
+					} else {
+						score -= 20
+					}
+				} else if board[i][j] == 0 && board[i][j+3] == 0 {
+					// Penalize potential threats from the opponent
+					score -= 5
+				}
+			}
+		}
+	}
+
+	// Check for potential vertical threats
+	b_trans := transpose(board)
+	for i := 0; i < 8; i++ {
+		for j := 0; j < 5; j++ {
+			if b_trans[i][j] == b_trans[i][j+1] && b_trans[i][j+1] == b_trans[i][j+2] && b_trans[i][j+2] != 0 {
+				if b_trans[i][j+1] == turn {
+					score += 10
+				} else {
+					score -= 20
+				}
+				if b_trans[i][j] == 0 && b_trans[i][j+3] == 0 {
+					// Penalize potential threats from the opponent
+					score -= 5
+				}
+			}
+		}
+	}
+
+	// Check for potential diagonal threats (left-top to right-bottom)
+	for i := 0; i < 5; i++ {
+		for j := 0; j < 5; j++ {
+			if board[i][j] == board[i+1][j+1] && board[i+1][j+1] == board[i+2][j+2] && board[i+2][j+2] != 0 {
+				if board[i+1][j+1] == turn {
+					score += 10
+				} else {
+					score -= 20
+				}
+				if board[i][j] == 0 && board[i+3][j+3] == 0 {
+					// Penalize potential threats from the opponent
+					score -= 5
+				}
+			}
+		}
+	}
+
+	// Check for potential diagonal threats (right-top to left-bottom)
+	for i := 0; i < 5; i++ {
+		for j := 3; j < 8; j++ {
+			if board[i][j] == board[i+1][j-1] && board[i+1][j-1] == board[i+2][j-2] && board[i+2][j-2] != 0 {
+				if board[i+1][j-1] == turn {
+					score += 10
+				} else {
+					score -= 20
+				}
+				if board[i][j] == 0 && board[i+3][j-3] == 0 {
+					// Penalize potential threats from the opponent
+					score -= 5
+				}
+			}
+		}
+	}
+
+	return score
+}
+
 func addCoin(board *[8][8]int, col int, turn int) {
 	// pass the args by reference to cause the states to persist
 	// col specifies the column into which we have to drop the coin. Ranges from 0 to 7
