@@ -41,3 +41,6 @@ Feel free to contribute to the development of this Connect 4 AI in GoLang. If yo
 This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code as needed.
 
 Enjoy playing Connect 4 in GoLang!
+
+## Video Explanation🎬 
+https://www.youtube.com/watch?v=6m2n2773AB0
